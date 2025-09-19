@@ -1,0 +1,34 @@
+{
+  "name": "@camila-arce/vue-country-flag-selector",
+  "private": false,
+  "version": "0.1.15",
+  "type": "module",
+  "main": "./dist/vue-country-flag-selector.umd.js",
+  "module": "./dist/vue-country-flag-selector.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-country-flag-selector.es.js",
+      "require": "./dist/vue-country-flag-selector.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.0",
+    "vue": "^3.4.21"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  }
+}
