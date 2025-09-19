@@ -1,6 +1,6 @@
 # Vue Country Flag Selector
 
-![Demostración del componente](https://raw.githubusercontent.com/camila-arce/vue-country-flag-selector/main/assets/demo.gif)
+![Demostración del componente](https://raw.githubusercontent.com/camilaarce/vue-country-flag-selector/main/assets/demo.gif)
 
 Un componente de **Vue 3**, simple y personalizable, para seleccionar un país de una lista completa, mostrando su respectiva bandera y con funcionalidad de búsqueda integrada.
 
