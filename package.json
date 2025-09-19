@@ -1,7 +1,7 @@
 {
   "name": "@camila-arce/vue-country-flag-selector",
   "private": false,
-  "version": "0.1.16",
+  "version": "0.1.17",
   "type": "module",
   "main": "./dist/vue-country-flag-selector.umd.js",
   "module": "./dist/vue-country-flag-selector.es.js",

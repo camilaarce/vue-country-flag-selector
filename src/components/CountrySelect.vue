@@ -1,5 +1,5 @@
 <template>
-    <div class="country-select" ref="selectElement">
+    <div class="country-select" :class="[themeClass, { open: isOpen }]" ref="selectElement">
         <div class="selected-option" @click="toggleDropdown">
             <div v-if="selectedCountry" class="option-content">
                 <img :src="selectedCountry.flagUrl" :alt="'Bandera de ' + selectedCountry.label" class="flag-icon"
@@ -42,6 +42,11 @@ const props = defineProps({
     placeholder: {
         type: String,
         default: 'Seleccione un país'
+    },
+    theme: {
+        type: String,
+        default: 'light',
+        validator: (value) => ['light', 'dark'].includes(value),
     }
 });
 
@@ -53,6 +58,10 @@ const isOpen = ref(false);
 const selectElement = ref(null);
 const searchTerm = ref('');
 const searchInput = ref(null);
+
+const themeClass = computed(() => {
+    return props.theme === 'dark' ? 'country-select--dark' : '';
+});
 
 const onImageError = (event) => {
     console.error("Error al cargar la imagen de la bandera:", event.target.src);
@@ -111,10 +120,49 @@ onUnmounted(() => {
 
 <style scoped>
 .country-select {
+    --cs-bg: #fff;
+    --cs-text: #333;
+    --cs-border: #ccc;
+    --cs-border-focus: #007bff;
+    --cs-placeholder: #888;
+    --cs-dropdown-bg: #fff;
+    --cs-dropdown-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --cs-option-hover-bg: #f0f0f0;
+    --cs-search-bg: #f9f9f9;
+    --cs-search-border: #e0e0e0;
+    --cs-arrow-color: #333;
+    --cs-scrollbar-track-bg: #f1f1f1;
+    --cs-scrollbar-thumb-bg: #888;
+    --cs-scrollbar-thumb-hover-bg: #555;
+
     position: relative;
     width: 100%;
     font-family: sans-serif;
-    color: #333;
+}
+
+.country-select.country-select--dark {
+    --cs-bg: #414141;
+    --cs-text: #ececec;
+    --cs-border: #646464;
+    --cs-border-focus: #63b3ed;
+    --cs-placeholder: #c6cfdb;
+    --cs-dropdown-bg: #383838;
+    --cs-dropdown-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --cs-option-hover-bg: #4a5568;
+    --cs-search-bg: #272727;
+    --cs-search-border: #6b6b6b;
+    --cs-arrow-color: #e2e8f0;
+    --cs-scrollbar-track-bg: #444444;
+    --cs-scrollbar-thumb-bg: #6e6e6e;
+    --cs-scrollbar-thumb-hover-bg: #c5c5c5;
+}
+
+.country-select {
+    position: relative;
+    width: 100%;
+    font-family: sans-serif;
+    color: var(--cs-text);
+    border-color: var(--cs-border);
 }
 
 .selected-option {
@@ -122,10 +170,10 @@ onUnmounted(() => {
     align-items: center;
     justify-content: space-between;
     padding: 10px 12px;
-    border: 1px solid #ccc;
+    border: var(--cs-border);
     border-radius: 6px;
     cursor: pointer;
-    background-color: #fff;
+    background-color: var(--cs-bg);
 }
 
 .option-content {
@@ -148,11 +196,11 @@ onUnmounted(() => {
 }
 
 .placeholder {
-    color: #888;
+    color: var(--cs-placeholder);
 }
 
 .arrow {
-    border: solid #555;
+    border: solid var(--cs-arrow-color);
     border-width: 0 2px 2px 0;
     display: inline-block;
     padding: 3px;
@@ -169,8 +217,8 @@ onUnmounted(() => {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--cs-dropdown-bg);
+    border: 1px solid var(--cs-border);
     border-top: none;
     border-radius: 0 0 6px 6px;
     max-height: 250px;
@@ -183,17 +231,24 @@ onUnmounted(() => {
 
 .search-box {
     padding: 8px;
-    border-bottom: 1px solid #eee;
-    background-color: #fff;
+    border-bottom: 1px solid var();
+    background-color: var(--cs-bg);
 }
 
 .search-input {
     width: 100%;
     padding: 8px 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--cs-dropdown-bg);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 0.95rem;
+    background-color: var(--cs-search-bg);
+    color: var(--cs-text);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--cs-border-focus);
 }
 
 .option {
@@ -202,12 +257,30 @@ onUnmounted(() => {
 }
 
 .option:hover {
-    background-color: #f0f0f0;
+    background-color: var(--cs-option-hover-bg);
 }
 
 .no-results {
     padding: 10px 12px;
     color: #888;
     text-align: center;
+}
+
+.options-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.options-container::-webkit-scrollbar-track {
+    background: var(--cs-scrollbar-track-bg);
+    border-radius: 0 5px 5px 0;
+}
+
+.options-container::-webkit-scrollbar-thumb {
+    background: var(--cs-scrollbar-thumb-bg);
+    border-radius: 4px;
+}
+
+.options-container::-webkit-scrollbar-thumb:hover {
+    background: var(--cs-scrollbar-thumb-hover-bg);
 }
 </style>

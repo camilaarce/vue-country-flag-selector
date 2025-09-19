@@ -45,6 +45,7 @@ const selectedCountry = ref(''); // Por ejemplo, 'AR' para Argentina
     <CountrySelect
       v-model="selectedCountry"
       placeholder="Elige tu país de origen"
+      theme="light" // 'light' or 'dark'
     />
     <p v-if="selectedCountry">
       País seleccionado (código): <strong>{{ selectedCountry }}</strong>
@@ -68,4 +69,5 @@ const selectedCountry = ref(''); // Por ejemplo, 'AR' para Argentina
 |---------------|--------|-----------------------|-----------------------------------------------------------------------------|
 | `modelValue`  | String | `''`                  | Valor del país seleccionado (código de 2 letras, ej: `AR`). Usar con `v-model`. |
 | `placeholder` | String | `Seleccione un país`  | Texto mostrado cuando no hay país seleccionado.                             |
+|    `theme`    | String | `light`  | Tema del componente ('light' o 'dark').                                       |
 # vue-country-flag-selector
